@@ -1,0 +1,29 @@
+pipeline {
+    agent { 
+        label'agentVM1'
+    } 
+    
+    tools gradle4 'gradle4'
+    stages {
+        stage("checkout") {
+            steps{
+                checkout scm
+            }
+        }
+        stage("build") {
+            steps {
+            sh "gradle clean build"
+            }
+        }
+    }
+    post {
+        success {
+            addBadge(icon: 'completed.gif', test: "Success" )
+        }
+
+        failure {
+            addBadge(icon: 'error.gif', text: 'Failure')
+        }
+
+    }
+}
