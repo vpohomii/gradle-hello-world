@@ -3,7 +3,7 @@ pipeline {
         label'agentVM1'
     } 
     
-    tool name: 'gradle4', type: 'gradle'
+    tools { gradle 'gradle4' }
     stages {
         stage("checkout") {
             steps{
